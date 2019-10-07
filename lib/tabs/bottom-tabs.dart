@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterstudy/home/home-page.dart';
 
 class BottomTabs extends StatefulWidget {
+  static final String sName = "tabs";
   BottomTabs();
 
   @override

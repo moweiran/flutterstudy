@@ -32,3 +32,28 @@ FLUTTER_STORAGE_BASE_URL https://storage.flutter-io.cn
 
 deployment发布
 flutter build apk --split-per-abi
+
+Flutter Resolving dependencies...很慢解决办法
+打开Flutter SDK：flutter\packages\flutter_tools\gradle\flutter.gradle
+buildscript {
+    repositories {
+       // google()
+       // jcenter()
+        maven{ url 'https://maven.aliyun.com/repository/google' }
+        maven{ url 'https://maven.aliyun.com/repository/jcenter' }
+        maven{url 'http://maven.aliyun.com/nexus/content/groups/public'}
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+    }
+}
+allprojects {
+    repositories {
+        // google()
+        // jcenter()
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+    }
+}
+...

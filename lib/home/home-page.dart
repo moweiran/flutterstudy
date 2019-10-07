@@ -1,11 +1,6 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterstudy/model/common/responseData.dart';
-import 'package:flutterstudy/model/news/news.dart';
 import 'package:flutterstudy/pullrefresh/PullRefreshPage.dart';
-
+import 'package:qr_utils/qr_utils.dart';
 import 'myhomepage.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,6 +12,8 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   List<dynamic> items = new List<dynamic>();
+  String _scanBarcode = 'Unknown';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,33 +33,11 @@ class HomePageState extends State<HomePage> {
                 // mainAxisSize: MainAxisSize.min,
                 // mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Container(
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            color: Colors.red,
-                            padding: EdgeInsets.all(5.0),
-                          ),
-                          flex: 1,
-                        ),
-                        Expanded(
-                          child: Container(
-                            color: Colors.yellow,
-                            padding: EdgeInsets.all(5.0),
-                          ),
-                          flex: 2,
-                        ),
-                        Expanded(
-                          child: Container(
-                            color: Colors.blue,
-                            padding: EdgeInsets.all(5.0),
-                          ),
-                          flex: 1,
-                        ),
-                      ],
-                    ),
+                  RaisedButton(
+                    onPressed: scan,
+                    child: Text("Go to QR scan"),
                   ),
+                  Text(_scanBarcode),
                   Container(
                     height: 40,
                     child: RaisedButton(
@@ -90,22 +65,6 @@ class HomePageState extends State<HomePage> {
                       },
                     ),
                   ),
-                  Container(
-                    child: RaisedButton(
-                      child: Text('http post'),
-                      onPressed: () {
-                        getHttp();
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: viewportConstraints.maxHeight - 60,
-                    child: ListView.builder(
-                      itemBuilder: (c, i) => NewsItem(items, i),
-                      itemExtent: 100.0,
-                      itemCount: items.length,
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -115,46 +74,11 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  void getHttp() async {
-    try {
-      Response response = await Dio().post(
-        "http://api2.portal.lwtch.com/api/v1.0/mobile/news/list",
-        data: {
-          "condition": {
-            "title": '',
-          },
-          "pager": {
-            "currentPage": 1,
-            "itemPerPage": 10,
-          }
-        },
-      );
-      setState(() {
-        items = response.data['data'];
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-}
-
-class NewsItem extends StatefulWidget {
-  List<dynamic> items;
-  int index;
-  NewsItem(this.items, this.index);
-
-  @override
-  NewsItemState createState() => NewsItemState();
-}
-
-class NewsItemState extends State<NewsItem> {
-  NewsItemState();
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Center(
-        child: Text('${widget.items[widget.index]['subTitle']}'),
-      ),
-    );
+  void scan() async {
+    final content = await QrUtils.scanQR;
+    if (! mounted) return;
+    setState(() {
+      _scanBarcode = content;
+    });
   }
 }
