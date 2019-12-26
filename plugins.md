@@ -28,7 +28,7 @@ Flutter plugin picker. Include NumberPicker, DateTimePicker, ArrayPicker, and de
 
 7.extended_nested_scroll_view
 
-8.fluro 
+8.fluro
 https://github.com/theyakka/fluro
 The brightest, hippest, coolest router for Flutter.
 
@@ -40,18 +40,18 @@ A cross platform plugin for displaying local notifications.
 https://github.com/marcojakob/dart-event-bus
 A simple Event Bus using Dart Streams for decoupling applications.
 
-11.flutter_blue 
+11.flutter_blue
 https://github.com/pauldemarco/flutter_blue
 FlutterBlue is a bluetooth plugin for Flutter, a new mobile SDK to help developers build modern apps for iOS and Android.
 
 12.simple_permissions
 A new flutter plugin for checking and requesting permissions on iOs and Android.
 
-13.flutter_amap 
+13.flutter_amap
 https://github.com/jzoom/flutter_amap
-高德地图3d flutter组件。
-展示原生android、ios高德地图，并与flutter交互。
-注意：随着flutter版本的提升， 本项目也会随之更新，目前这个版本只能在单独的controller或者activity中打开高德地图。
+高德地图 3d flutter 组件。
+展示原生 android、ios 高德地图，并与 flutter 交互。
+注意：随着 flutter 版本的提升， 本项目也会随之更新，目前这个版本只能在单独的 controller 或者 activity 中打开高德地图。
 
 14.barcode_scan
 https://github.com/apptreesoftware/flutter_barcode_reader
@@ -63,3 +63,6 @@ Android: https://github.com/dm77/barcodescanner
 15.qrcode_reader
 https://github.com/bcko/flutter_qrcode_reader
 A Flutter plugin for reading QR Codes with the camera.
+
+16.redux: ^3.0.0
+17.flutter_redux: ^0.5.3
